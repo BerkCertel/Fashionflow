@@ -1,0 +1,12 @@
+.category-img {
+  width: 120px;
+  height: 100px;
+}
+
+.footer-icon {
+  font-size: 60px;
+}
+
+.ant-progress-status-warning .ant-progress-bg {
+  background-color: #faad14; /* Sarı renk */
+}
