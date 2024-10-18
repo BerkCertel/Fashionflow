@@ -4,20 +4,21 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 function ModalDialog({ isDialogShow, setIsDialogShow }) {
   const handleCloseDialog = (event) => {
     const checked = event.target.checked;
-
     localStorage.setItem("dialog", JSON.stringify(!checked));
-    setIsDialogShow(false); // Modalı kapat
+    setIsDialogShow(false);
   };
 
   return (
     <div
       className={`w-full h-full flex justify-center items-center bg-black bg-opacity-50 ${
-        // isDialogShow ? "fixed z-20" : "hidden"
-        isDialogShow ? "hidden" : "hidden"
+        isDialogShow ? "fixed z-20" : "hidden"
       }`}
       onClick={() => setIsDialogShow(false)}
     >
-      <div className="bg-orange-500 p-4 rounded-lg w-1/2 h-1/2 shadow-lg relative">
+      <div
+        className="bg-orange-500 p-4 rounded-lg w-2/3 h-2/3 shadow-lg relative"
+        onClick={(e) => e.stopPropagation()} // Modal dışına tıklamayı engelle
+      >
         <IoIosCloseCircleOutline
           className="text-3xl absolute top-2 right-2 cursor-pointer hover:text-white duration-500"
           onClick={() => setIsDialogShow(false)}
@@ -30,7 +31,7 @@ function ModalDialog({ isDialogShow, setIsDialogShow }) {
               alt="Modal Görseli"
             />
           </div>
-          <div className="w-4/6 p-4  space-y-4">
+          <div className="w-4/6 p-4 space-y-4">
             <h2 className="text-white text-5xl font-bold mb-4 text-center">
               Don’t Miss Our 20% Discount!
             </h2>
@@ -51,7 +52,7 @@ function ModalDialog({ isDialogShow, setIsDialogShow }) {
             </div>
             <div className="form-check mt-3 text-center">
               <input type="checkbox" onClick={handleCloseDialog} />
-              <label className="text-white ml-2">Don`t show this again</label>
+              <label className="text-white ml-2">Don’t show this again</label>
             </div>
           </div>
         </div>

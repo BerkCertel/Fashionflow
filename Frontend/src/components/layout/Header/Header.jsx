@@ -1,12 +1,14 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FaUserAlt, FaHeart } from "react-icons/fa";
 import { BsCart2 } from "react-icons/bs";
+import { BiSearch } from "react-icons/bi";
 
-function Header() {
+function Header({ setIsSearchShow }) {
   return (
     <div>
       <header className="header-main-div">
-        <h1 className="top-bar text-white flex justify-center items-center bg-black  w-full min-h-12 text-xl">
+        <h1 className="top-bar text-white flex justify-center items-center bg-black sm:text-sm  w-full min-h-12 text-xl">
           Up to <span className="text-orange-500 px-2"> 50% Off </span> on New
           Season Products!!!
           <span className="text-orange-500 px-2 ">Check it out!</span>
@@ -41,10 +43,17 @@ function Header() {
                   to="/Auth"
                   className="flex justify-center items-center gap-1 "
                 >
-                  <FaUserAlt className="" />
+                  <FaUserAlt />
                   <span className=" text-center">Login</span>
                 </Link>
                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
+              </li>
+
+              <li className="relative group text-white hover:text-black transition-all duration-500  cursor-pointer">
+                <BiSearch
+                  className="text-3xl"
+                  onClick={() => setIsSearchShow(true)}
+                />
               </li>
 
               <li className="relative group text-white hover:text-black transition-all duration-500 pb-1">
@@ -77,5 +86,9 @@ function Header() {
     </div>
   );
 }
+
+Header.propTypes = {
+  setIsSearchShow: PropTypes.func,
+};
 
 export default Header;

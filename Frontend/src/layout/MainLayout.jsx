@@ -2,39 +2,47 @@ import PropTypes from "prop-types";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
 import ModalDialog from "../components/Modals/ModalDialog/ModalDialog";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import SearchDialog from "../components/Modals/SearchDialog/SearchDialog";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsDialogShow, setIsSearchShow } from "../redux/modalSlice";
 
 function MainLayout({ children }) {
-  const [isDialogShow, setIsDialogShow] = useState(true);
+  const dispatch = useDispatch();
+  const isDialogShow = useSelector((state) => state.modal.isDialogShow);
+  const isSearchShow = useSelector((state) => state.modal.isSearchShow);
 
   useEffect(() => {
     const dialogStatus = localStorage.getItem("dialog");
 
-    // Dialog durumu varsa, onu oku, yoksa varsayılan olarak true ayarla
     if (dialogStatus === null) {
       localStorage.setItem("dialog", JSON.stringify(true));
     } else {
-      setIsDialogShow(JSON.parse(dialogStatus));
+      dispatch(setIsDialogShow(JSON.parse(dialogStatus)));
     }
 
-    // Modalı 5 saniyede bir açma fonksiyonu
     const interval = setInterval(() => {
       if (JSON.parse(localStorage.getItem("dialog"))) {
-        setIsDialogShow(true);
+        dispatch(setIsDialogShow(true));
       }
     }, 2000);
 
-    // Temizlik işlemi
     return () => clearInterval(interval);
-  }, []);
+  }, [dispatch]);
+
+  console.log(isSearchShow);
 
   return (
     <div className="flex flex-col min-h-screen">
       <ModalDialog
         isDialogShow={isDialogShow}
-        setIsDialogShow={setIsDialogShow}
+        setIsDialogShow={(value) => dispatch(setIsDialogShow(value))}
       />
-      <Header />
+      <SearchDialog
+        isSearchShow={isSearchShow}
+        setIsSearchShow={(value) => dispatch(setIsSearchShow(value))}
+      />
+      <Header setIsSearchShow={(value) => dispatch(setIsSearchShow(value))} />
       <div className="flex-grow">{children}</div>
       <Footer />
     </div>
