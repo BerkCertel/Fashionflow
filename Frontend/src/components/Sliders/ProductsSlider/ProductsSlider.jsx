@@ -26,9 +26,11 @@ function ProductsSlider() {
 
   return (
     <div
-      className="homepage-slider-div mt-10
+      className="homepage-slider-div mt-10 border-b mb-10
     "
     >
+      <h3 className="text-center text-5xl font-thin mb-4  "> New Season</h3>
+      <hr />
       <Carousel
         responsive={responsive}
         swipeable={false}

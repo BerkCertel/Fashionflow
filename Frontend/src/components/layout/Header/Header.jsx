@@ -11,7 +11,9 @@ function Header({ setIsSearchShow }) {
         <h1 className="top-bar text-white flex justify-center items-center bg-black sm:text-sm  w-full min-h-12 text-xl">
           Up to <span className="text-orange-500 px-2"> 50% Off </span> on New
           Season Products!!!
-          <span className="text-orange-500 px-2 ">Check it out!</span>
+          <span className="text-orange-500 px-2 hover:underline cursor-pointer hover:text-orange-700 ">
+            Check it out!
+          </span>
         </h1>
 
         <nav className="  bg-orange-500 w-full  ">

@@ -31,16 +31,16 @@ function HomeBigSlider() {
         arrows={true}
         ssr={true}
         infinite={true}
-        autoPlay={false}
-        autoPlaySpeed={500}
+        autoPlay={true}
+        autoPlaySpeed={1000}
         keyBoardControl={true}
         customTransition="all .7s"
         transitionDuration={1000}
         containerClass="carousel-container border-b-2 border-orange-500"
-        itemClass="max-h-[605px] w-full object-cover"
+        itemClass="max-h-[815px] w-full object-cover"
       >
         <div className="relative">
-          <div className="absolute top-28 left-10 md:left-1/4 lg:left-1/4 p-3 rounded font-thin justify-center w-3/4 md:w-1/2 bg-black bg-opacity-30 text-white">
+          <div className="absolute top-20 right-24  md:left-1/4 lg:left-1/4 p-3 rounded font-thin  w-3/4 md:w-1/2 bg-black bg-opacity-30 text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-2">
               Embrace the Warmth of Summer!
             </h2>
@@ -55,55 +55,24 @@ function HomeBigSlider() {
             </Link>
           </div>
           <img
-            className="object-cover w-full h-[605px] md:h-[500px] lg:h-full"
+            className="object-cover w-full "
             src="/images/slider/slider3.jpg"
             alt=""
           />
         </div>
 
         <div>
-          <div className="absolute p-3 rounded font-thin text-center bottom-10 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-30 w-3/4 md:w-1/2 text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">
-              Everything You Need for Everyday Style!
-            </h2>
-            <p>
-              Looking for comfortable yet stylish everyday outfits? You’ve come
-              to the right place! Explore combinations that blend comfort with
-              elegance.
-            </p>
-          </div>
           <img
-            className="object-cover w-full h-[605px] md:h-[500px] lg:h-full"
-            src="/images/slider/slider6.jpg"
-            alt=""
-          />
-        </div>
-
-        <div>
-          <div className="absolute p-3 rounded-xl top-36 left-10 md:left-1/4 lg:left-1/4 w-3/4 md:w-2/4 bg-black bg-opacity-30 text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2 uppercase">
-              Everything You Need for Everyday Style!
-            </h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi qui
-              repellat reprehenderit. Omnis eos cupiditate deserunt, nulla
-              reiciendis suscipit debitis rerum error facere perspiciatis porro
-              quam iste beatae soluta, voluptatem maxime, ex esse rem quis eius
-              alias in? Voluptatibus sed totam fugiat quas delectus dicta
-              dolorum hic mollitia recusandae dolorem.
-            </p>
-          </div>
-          <img
-            className="object-cover w-full h-[605px] md:h-[500px] lg:h-full"
-            src="/images/slider/slider5.jpg"
+            className="object-cover w-full  "
+            src="/images/slider/slider9.jpg"
             alt=""
           />
         </div>
 
         <div>
           <img
-            className="object-cover w-full h-[605px] md:h-[500px] lg:h-full"
-            src="/images/slider/slider2.jpg"
+            className="object-cover inset-0 h-full w-full "
+            src="/images/slider/slider7.jpg"
             alt=""
           />
         </div>

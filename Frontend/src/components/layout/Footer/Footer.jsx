@@ -6,7 +6,7 @@ import FooterIcons from "./FooterIcons/FooterIcons";
 
 function Footer() {
   return (
-    <div className="footer-main-div w-full h-full mt-14 ">
+    <div className="footer-main-div w-full h-full mt-5 ">
       <FooterIcons />
 
       <div className="  bg-black text-white p-5">

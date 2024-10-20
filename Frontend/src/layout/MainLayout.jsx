@@ -33,7 +33,7 @@ function MainLayout({ children }) {
   console.log(isSearchShow);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen ">
       <ModalDialog
         isDialogShow={isDialogShow}
         setIsDialogShow={(value) => dispatch(setIsDialogShow(value))}
