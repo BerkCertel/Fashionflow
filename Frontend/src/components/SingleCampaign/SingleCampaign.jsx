@@ -3,7 +3,7 @@ function SingleCampaign() {
     <div className="w-full h-[650px] relative">
       <img
         className="object-cover bg-center h-full w-full"
-        src="../../../public/images/single-campaign.png"
+        src="/images/single-campaign.png"
         alt=""
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-5">

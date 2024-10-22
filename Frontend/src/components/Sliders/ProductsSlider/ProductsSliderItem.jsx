@@ -10,7 +10,7 @@ function ProductsSliderItem({ product }) {
 
   return (
     <div
-      className=" flex justify-center items-center flex-col cursor-pointer shadow rounded border hover:shadow-xl"
+      className=" flex justify-center items-center flex-col cursor-pointer shadow rounded border hover:shadow-xl transition duration-500"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -33,18 +33,17 @@ function ProductsSliderItem({ product }) {
             <IoMdEye className="text-sm" />
           </Link>
         </div>
-
         <img
-          className={`absolute object-cover max-w-[250px] max-h-[270px] mt-2 rounded  ${
-            isHovered ? "invisible" : "visible z-20"
+          className={`absolute object-cover max-w-[250px] max-h-[270px] mt-2 rounded transition-opacity duration-700  ${
+            isHovered ? "opacity-0" : "opacity-100 z-20"
           }`}
           src={product.images.thumbs[0]}
           alt="Product Image 1"
         />
 
         <img
-          className={`max-w-[250px] max-h-[270px] mt-2 rounded  ${
-            isHovered ? "visible" : "invisible"
+          className={`max-w-[250px] max-h-[270px] mt-2 rounded transition-opacity duration-700  ${
+            isHovered ? "opacity-100" : "opacity-0"
           }`}
           src={product.images.thumbs[1]}
           alt="Product Image 2"

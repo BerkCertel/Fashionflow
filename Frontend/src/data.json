@@ -8,13 +8,15 @@
     },
     "discount": 22,
     "images": {
-      "singleImage": "/images/products/product1/1.png",
+      "singleImage": "/images/products/product1/1.webp",
       "thumbs": [
-        "/images/products/product1/1.png",
-        "/images/products/product1/2.png",
-        "/images/products/product1/3.png"
+        "/images/products/product1/1.webp",
+        "/images/products/product1/2.webp",
+        "/images/products/product1/3.webp",
+        "/images/products/product1/4.webp"
       ]
-    }
+    },
+    "isNewSeason": false
   },
   {
     "id": 2,
@@ -25,13 +27,15 @@
     },
     "discount": 33,
     "images": {
-      "singleImage": "/images/products/product2/1.png",
+      "singleImage": "/images/products/product2/1.webp",
       "thumbs": [
-        "/images/products/product2/1.png",
-        "/images/products/product2/2.png",
-        "/images/products/product2/3.png"
+        "/images/products/product2/1.webp",
+        "/images/products/product2/2.webp",
+        "/images/products/product2/3.webp",
+        "/images/products/product2/4.webp"
       ]
-    }
+    },
+    "isNewSeason": false
   },
   {
     "id": 3,
@@ -42,13 +46,15 @@
     },
     "discount": 90,
     "images": {
-      "singleImage": "/images/products/product3/1.png",
+      "singleImage": "/images/products/product3/1.webp",
       "thumbs": [
-        "/images/products/product3/1.png",
-        "/images/products/product3/2.png",
-        "/images/products/product3/3.png"
+        "/images/products/product3/1.webp",
+        "/images/products/product3/2.webp",
+        "/images/products/product3/3.webp",
+        "/images/products/product3/4.webp"
       ]
-    }
+    },
+    "isNewSeason": false
   },
   {
     "id": 4,
@@ -59,13 +65,15 @@
     },
     "discount": 40,
     "images": {
-      "singleImage": "/images/products/product4/1.png",
+      "singleImage": "/images/products/product4/1.webp",
       "thumbs": [
-        "/images/products/product4/1.png",
-        "/images/products/product4/2.png",
-        "/images/products/product4/3.png.png"
+        "/images/products/product4/1.webp",
+        "/images/products/product4/2.webp",
+        "/images/products/product4/3.webp",
+        "/images/products/product4/4.webp"
       ]
-    }
+    },
+    "isNewSeason": false
   },
   {
     "id": 5,
@@ -76,12 +84,109 @@
     },
     "discount": 40,
     "images": {
-      "singleImage": "/images/products/product5/1.png",
+      "singleImage": "/images/products/product5/1.webp",
       "thumbs": [
-        "/images/products/product5/1.png",
-        "/images/products/product5/2.png",
-        "/images/products/product5/3.png"
+        "/images/products/product5/1.webp",
+        "/images/products/product5/2.webp",
+        "/images/products/product5/3.webp",
+        "/images/products/product5/4.webp"
       ]
-    }
+    },
+    "isNewSeason": false
+  },
+  {
+    "id": 6,
+    "name": "Elegant Silk Blouse",
+    "price": {
+      "oldPrice": 250.0,
+      "newPrice": 180.0
+    },
+    "discount": 28,
+    "images": {
+      "singleImage": "/images/products/product6/1.webp",
+      "thumbs": [
+        "/images/products/product6/1.webp",
+        "/images/products/product6/2.webp",
+        "/images/products/product6/3.webp",
+        "/images/products/product6/4.webp"
+      ]
+    },
+    "isNewSeason": true
+  },
+  {
+    "id": 7,
+    "name": "Chic Denim Jacket",
+    "price": {
+      "oldPrice": 300.0,
+      "newPrice": 210.0
+    },
+    "discount": 30,
+    "images": {
+      "singleImage": "/images/products/product7/1.webp",
+      "thumbs": [
+        "/images/products/product7/1.webp",
+        "/images/products/product7/2.webp",
+        "/images/products/product7/3.webp",
+        "/images/products/product7/4.webp"
+      ]
+    },
+    "isNewSeason": true
+  },
+  {
+    "id": 8,
+    "name": "Casual Cotton Dress",
+    "price": {
+      "oldPrice": 180.0,
+      "newPrice": 120.0
+    },
+    "discount": 33,
+    "images": {
+      "singleImage": "/images/products/product8/1.webp",
+      "thumbs": [
+        "/images/products/product8/1.webp",
+        "/images/products/product8/2.webp",
+        "/images/products/product8/3.webp",
+        "/images/products/product8/4.webp"
+      ]
+    },
+    "isNewSeason": true
+  },
+  {
+    "id": 9,
+    "name": "Floral Midi Skirt",
+    "price": {
+      "oldPrice": 150.0,
+      "newPrice": 90.0
+    },
+    "discount": 40,
+    "images": {
+      "singleImage": "/images/products/product9/1.webp",
+      "thumbs": [
+        "/images/products/product9/1.webp",
+        "/images/products/product9/2.webp",
+        "/images/products/product9/3.webp",
+        "/images/products/product9/4.webp"
+      ]
+    },
+    "isNewSeason": true
+  },
+  {
+    "id": 10,
+    "name": "Vintage Leather Boots",
+    "price": {
+      "oldPrice": 350.0,
+      "newPrice": 280.0
+    },
+    "discount": 20,
+    "images": {
+      "singleImage": "/images/products/product10/1.webp",
+      "thumbs": [
+        "/images/products/product10/1.webp",
+        "/images/products/product10/2.webp",
+        "/images/products/product10/3.webp",
+        "/images/products/product10/4.webp"
+      ]
+    },
+    "isNewSeason": true
   }
 ]
