@@ -10,3 +10,13 @@
 .ant-progress-status-warning .ant-progress-bg {
   background-color: #faad14; /* Sarı renk */
 }
+
+.custom-shadow {
+  -webkit-box-shadow: 0px 0px 47px -14px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 47px -14px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 47px -14px rgba(0, 0, 0, 0.75);
+}
+
+.clip-wave {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 80%);
+}

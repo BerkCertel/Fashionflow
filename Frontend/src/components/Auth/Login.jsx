@@ -1,16 +1,18 @@
-function Login() {
+import PropTypes from "prop-types";
+
+function Login({ setIsLogin }) {
   return (
     <section className="bg-white pt-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 container mx-auto shadow-xl ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 container mx-auto custom-shadow p-5">
         <div className="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8 shadow">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 ">
             <img
-              className="object-cover object-center w-full h-full"
-              src="../../../public/images/Deneme/pexels-alisson-souto-864951-1759622.jpg"
+              className="object-cover object-center w-full h-full rounded"
+              src="/images/Deneme/pexels-alisson-souto-864951-1759622.jpg"
               alt=""
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent rounded"></div>
 
           <div className="relative">
             <div className="w-full max-w-xl xl:w-full xl:mx-auto xl:pr-24 xl:max-w-xl">
@@ -110,6 +112,9 @@ function Login() {
                 href="#"
                 title=""
                 className="font-medium text-orange-600 transition-all duration-200 hover:text-orange-700 focus:text-orange-700 hover:underline"
+                onClick={() => {
+                  setIsLogin(false);
+                }}
               >
                 Create a free account
               </a>
@@ -243,5 +248,9 @@ function Login() {
     </section>
   );
 }
+
+Login.propTypes = {
+  setIsLogin: PropTypes.func,
+};
 
 export default Login;

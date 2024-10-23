@@ -29,12 +29,12 @@ function Header({ setIsSearchShow }) {
               </li>
 
               <li className="relative group text-white hover:text-black transition-all duration-500 pb-1">
-                <Link to="/Blogs">Blogs</Link>
+                <Link to="/blogs">Blogs</Link>
                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
               </li>
 
               <li className="relative group text-white hover:text-black transition-all duration-500 pb-1">
-                <Link to="/Contact">Contact</Link>
+                <Link to="/contact">Contact</Link>
                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
               </li>
             </ul>
@@ -42,7 +42,7 @@ function Header({ setIsSearchShow }) {
             <ul className="flex justify-center items-center gap-3">
               <li className="relative group text-white hover:text-black transition-all duration-500 pb-1">
                 <Link
-                  to="/Auth"
+                  to="/auth"
                   className="flex justify-center items-center gap-1 "
                 >
                   <FaUserAlt />

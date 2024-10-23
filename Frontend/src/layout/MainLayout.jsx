@@ -30,8 +30,6 @@ function MainLayout({ children }) {
     return () => clearInterval(interval);
   }, [dispatch]);
 
-  console.log(isSearchShow);
-
   return (
     <div className="flex flex-col min-h-screen ">
       <ModalDialog

@@ -4,9 +4,6 @@ import {
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
-  FaPinterestP,
-  FaSnapchatGhost,
-  FaTiktok,
 } from "react-icons/fa";
 
 function FooterSocials() {
@@ -64,39 +61,9 @@ function FooterSocials() {
               <FaLinkedinIn className="text-white hover:text-orange-500 transition duration-300 text-2xl" />
             </a>
           </li>
-          <li>
-            <a
-              href="https://www.pinterest.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaPinterestP className="text-white hover:text-orange-500 transition duration-300 text-2xl" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.snapchat.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaSnapchatGhost className="text-white hover:text-orange-500 transition duration-300 text-2xl" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaTiktok className="text-white hover:text-orange-500 transition duration-300 text-2xl" />
-            </a>
-          </li>
         </ul>
       </div>
-
-      {/* Empty area next to socials, you can fill with promotions or other information */}
       <div className="flex items-center justify-center  h-3/4 w-full">
-        {/* Öneri: Belki footer'da son kampanyalar veya bülten bilgisi eklenebilir */}
         <p className="text-xl text-gray-400">
           Stay updated with our latest offers and news!
         </p>

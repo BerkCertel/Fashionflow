@@ -1,3 +1,4 @@
+import Blogs from "../../components/Blogs/Blogs";
 import Categories from "../../components/Categories/Categories";
 import SingleCampaign from "../../components/SingleCampaign/SingleCampaign";
 import HomeBigSlider from "../../components/Sliders/HomeBigSlider/HomeBigSlider";
@@ -11,6 +12,7 @@ function HomePage() {
       <ProductsSlider />
       <SingleCampaign />
       <ProductsSlider />
+      <Blogs />
     </div>
   );
 }
