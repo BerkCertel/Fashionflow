@@ -6,14 +6,14 @@ import ProductsSlider from "../../components/Sliders/ProductsSlider/ProductsSlid
 
 function HomePage() {
   return (
-    <div className="home-page-main-div">
+    <main className="home-page-main-div">
       <HomeBigSlider />
       <Categories />
       <ProductsSlider />
       <SingleCampaign />
       <ProductsSlider />
       <Blogs />
-    </div>
+    </main>
   );
 }
 

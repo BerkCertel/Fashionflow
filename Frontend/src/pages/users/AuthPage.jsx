@@ -7,7 +7,7 @@ function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="flex flex-col items-center">
+    <main className="flex flex-col items-center">
       <div className="mx-auto container flex justify-center items-center space-x-5 bg-orange-500 w-1/3 mt-5 p-2 rounded-lg relative">
         <div
           onClick={() => setIsLogin(true)}
@@ -56,7 +56,7 @@ function AuthPage() {
           <Register setIsLogin={setIsLogin} />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

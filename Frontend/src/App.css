@@ -20,3 +20,14 @@
 .clip-wave {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 80%);
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox için */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

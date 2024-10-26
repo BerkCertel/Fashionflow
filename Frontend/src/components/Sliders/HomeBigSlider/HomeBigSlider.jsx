@@ -56,7 +56,7 @@ function HomeBigSlider() {
           </div>
           <img
             className="object-cover w-full "
-            src="/images/slider/slider3.jpg"
+            src="/images/BigSlider/slider1.jpg"
             alt=""
           />
         </div>
@@ -64,7 +64,7 @@ function HomeBigSlider() {
         <div>
           <img
             className="object-cover w-full  "
-            src="/images/slider/slider9.jpg"
+            src="/images/BigSlider/slider2.jpg"
             alt=""
           />
         </div>
@@ -72,7 +72,7 @@ function HomeBigSlider() {
         <div>
           <img
             className="object-cover inset-0 h-full w-full "
-            src="/images/slider/slider7.jpg"
+            src="/images/BigSlider/slider3.jpg"
             alt=""
           />
         </div>

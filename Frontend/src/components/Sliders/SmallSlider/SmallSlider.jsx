@@ -1,18 +1,18 @@
 import Carousel from "react-multi-carousel";
 
-function Gallery() {
+function HomeBigSlider() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+      items: 1,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 1,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -21,54 +21,54 @@ function Gallery() {
   };
 
   return (
-    <div className="product-img-div flex flex-col w-2/6 space-y-3 ">
-      <div className="w-full h-full">
-        <img
-          className="max-h-[650px] object-cover bg-center rounded"
-          src="/images/products/product7/1.webp"
-          alt=""
-        />
-      </div>
-
+    <div className="homepage-slider-div">
       <Carousel
         responsive={responsive}
         swipeable={false}
         draggable={false}
-        showDots={false}
-        arrows={true}
+        showDots={true}
+        arrows={false}
         ssr={true}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={2000}
+        autoPlaySpeed={1000}
         keyBoardControl={true}
         customTransition="all .7s"
         transitionDuration={1000}
-        containerClass="carousel-container    "
-        itemClass=" flex justify-center items-center p-5"
+        containerClass="carousel-container container mx-auto  w-1/2 p-3  mt-5 border rounded shadow"
+        itemClass="h-full w-full object-cover mb-3 "
       >
         <div>
           <img
-            className="rounded cursor-pointer"
-            src="/images/products/product7/1.webp"
+            className="object-cover w-full "
+            src="/images/SmallSlider/slider1.webp"
             alt=""
           />
         </div>
         <div>
           <img
-            className="rounded cursor-pointer"
-            src="/images/products/product7/2.webp"
+            className="object-cover w-full "
+            src="/images/SmallSlider/slider2.webp"
             alt=""
           />
         </div>
         <div>
-          <img src="/images/products/product7/3.webp" alt="" />
+          <img
+            className="object-cover w-full "
+            src="/images/SmallSlider/slider3.webp"
+            alt=""
+          />
         </div>
         <div>
-          <img src="/images/products/product7/4.webp" alt="" />
+          <img
+            className="object-cover w-full "
+            src="/images/SmallSlider/slider4.webp"
+            alt=""
+          />
         </div>
       </Carousel>
     </div>
   );
 }
 
-export default Gallery;
+export default HomeBigSlider;

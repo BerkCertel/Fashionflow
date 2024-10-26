@@ -2,11 +2,9 @@ import ProductDetails from "../../components/ProductDetails/ProductDetails";
 
 function ProductDetailsPage() {
   return (
-    <div>
-      <div>
-        <ProductDetails />
-      </div>
-    </div>
+    <main>
+      <ProductDetails />
+    </main>
   );
 }
 

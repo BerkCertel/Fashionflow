@@ -23,13 +23,11 @@ function Blogs() {
                 />
               </a>
               <span className="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-rose-500 bg-rose-100 mt-9">
-                {" "}
-                Technology{" "}
+                Technology
               </span>
               <p className="mt-6 text-xl font-semibold">
                 <a href="#" title="" className="text-black">
-                  {" "}
-                  How to mange your remote team?{" "}
+                  How to mange your remote team?
                 </a>
               </p>
               <p className="mt-4 text-gray-600">
@@ -38,8 +36,7 @@ function Blogs() {
               </p>
               <div className="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
               <span className="block text-sm font-bold tracking-widest text-gray-500 uppercase">
-                {" "}
-                Martin Jones . June 12, 2021{" "}
+                Martin Jones . June 12, 2021
               </span>
             </div>
 
@@ -52,13 +49,11 @@ function Blogs() {
                 />
               </a>
               <span className="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-sky-500 bg-sky-100 mt-9">
-                {" "}
-                Marketing{" "}
+                Marketing
               </span>
               <p className="mt-6 text-xl font-semibold">
                 <a href="#" title="" className="text-black">
-                  {" "}
-                  6 Product launching emails you want to use on next campaign.{" "}
+                  6 Product launching emails you want to use on next campaign.
                 </a>
               </p>
               <p className="mt-4 text-gray-600">
@@ -67,8 +62,7 @@ function Blogs() {
               </p>
               <div className="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
               <span className="block text-sm font-bold tracking-widest text-gray-500 uppercase">
-                {" "}
-                Martin Jones . June 12, 2021{" "}
+                Martin Jones . June 12, 2021
               </span>
             </div>
 
@@ -81,13 +75,11 @@ function Blogs() {
                 />
               </a>
               <span className="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-sky-500 bg-sky-100 mt-9">
-                {" "}
-                Marketing{" "}
+                Marketing
               </span>
               <p className="mt-6 text-xl font-semibold">
                 <a href="#" title="" className="text-black">
-                  {" "}
-                  Learn from the best: 7 email marketing ideas you can use{" "}
+                  Learn from the best: 7 email marketing ideas you can use
                 </a>
               </p>
               <p className="mt-4 text-gray-600">
@@ -96,8 +88,7 @@ function Blogs() {
               </p>
               <div className="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
               <span className="block text-sm font-bold tracking-widest text-gray-500 uppercase">
-                {" "}
-                Martin Jones . June 12, 2021{" "}
+                Martin Jones . June 12, 2021
               </span>
             </div>
           </div>

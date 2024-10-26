@@ -1,8 +1,8 @@
-import FooterSection from "./FooterSection/FooterSection";
-import FooterLogoSubs from "./FooterLogoSubs/FooterLogoSubs";
-import FooterMap from "./FooterMap/FooterMap";
-import FooterSocials from "./FooterSocials/FooterSocials";
-import FooterIcons from "./FooterIcons/FooterIcons";
+import FooterSection from "./FooterSection";
+import FooterLogoSubs from "./FooterLogoSubs";
+import FooterMap from "./FooterMap";
+import FooterSocials from "./FooterSocials";
+import FooterIcons from "./FooterIcons";
 
 function Footer() {
   return (

@@ -1,10 +1,12 @@
 import Cart from "../../components/Cart/Cart";
+import SmallSlider from "../../components/Sliders/SmallSlider/SmallSlider";
 
 function CartPage() {
   return (
-    <div>
+    <main>
+      <SmallSlider />
       <Cart />
-    </div>
+    </main>
   );
 }
 

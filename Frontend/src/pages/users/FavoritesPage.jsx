@@ -1,10 +1,12 @@
 import Favorites from "../../components/Favorites/Favorites";
+import SmallSlider from "../../components/Sliders/SmallSlider/SmallSlider";
 
 function FavoritesPage() {
   return (
-    <div>
+    <main>
+      <SmallSlider />
       <Favorites />
-    </div>
+    </main>
   );
 }
 

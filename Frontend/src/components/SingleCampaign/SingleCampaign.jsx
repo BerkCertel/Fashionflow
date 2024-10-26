@@ -13,7 +13,7 @@ function SingleCampaign() {
         <p className="text-lg text-center mb-4">
           Discover the latest products that are perfect for every occasion!
         </p>
-        <button className="bg-orange-500 text-white py-2 px-4 rounded transition-all duration-300 hover:bg-transparent hover:text-orange-500 border border-orange-500">
+        <button className=" bg-transparent text-white py-2 px-4 rounded transition-all duration-500 hover:bg-orange-500  border border-orange-500">
           View Products
         </button>
       </div>
