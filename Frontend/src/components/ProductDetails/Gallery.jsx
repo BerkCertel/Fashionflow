@@ -21,8 +21,11 @@ function Gallery() {
   };
 
   return (
-    <div className="product-img-div flex flex-col w-2/6 space-y-3 ">
-      <div className="w-full h-full">
+    <div className="product-img-div flex  flex-col w-2/6 space-y-3 top-1 ">
+      <div className="w-full h-full relative">
+        <p className=" absolute left-2 top-2 bg-red-600 text-white p-1 rounded-lg">
+          -%25
+        </p>
         <img
           className="max-h-[650px] object-cover bg-center rounded"
           src="/images/products/product7/1.webp"
@@ -43,12 +46,12 @@ function Gallery() {
         keyBoardControl={true}
         customTransition="all .7s"
         transitionDuration={1000}
-        containerClass="carousel-container    "
-        itemClass=" flex justify-center items-center p-5"
+        containerClass="carousel-container   "
+        itemClass=" flex justify-center items-center p-5  "
       >
-        <div>
+        <div className="">
           <img
-            className="rounded cursor-pointer"
+            className="rounded cursor-pointer border border-black "
             src="/images/products/product7/1.webp"
             alt=""
           />

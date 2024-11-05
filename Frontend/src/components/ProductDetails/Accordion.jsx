@@ -3,13 +3,14 @@ import { IoIosArrowForward } from "react-icons/io";
 
 function Accordion() {
   const [isOpenDetails, setIsOpenDetails] = useState(true);
+  const [isOpenSizes, setIsOpenSizes] = useState(true);
   const [isOpenFeature, setIsOpenFeature] = useState(false);
 
   return (
     <div>
-      <div className="w-full mx-auto bg-white  shadow-md overflow-hidden">
+      <div className="w-full mx-auto bg-white  shadow-md overflow-hidden ">
         <div
-          className="bg-orange-500 text-white p-4 cursor-pointer flex justify-between items-center border"
+          className="bg-orange-500 text-white p-4 cursor-pointer flex justify-between items-center border  "
           onClick={() => setIsOpenDetails(!isOpenDetails)}
         >
           <h3 className="text-lg font-semibold">Product Detail</h3>
@@ -20,7 +21,7 @@ function Accordion() {
           />
         </div>
         {isOpenDetails && (
-          <div className="p-4 text-gray-700 ">
+          <div className="p-4 text-gray-700 animate__animated animate__fadeIn ">
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro
               voluptatem aliquam quibusdam temporibus ipsam commodi perspiciatis
@@ -100,19 +101,20 @@ function Accordion() {
           </div>
         )}
       </div>
+
       <div className="w-full mx-auto bg-white  shadow-md overflow-hidden">
         <div
           className="bg-orange-500 text-white p-4 cursor-pointer flex justify-between items-center border"
-          onClick={() => setIsOpenDetails(!isOpenDetails)}
+          onClick={() => setIsOpenSizes(!isOpenSizes)}
         >
           <h3 className="text-lg font-semibold">Product Detail</h3>
           <IoIosArrowForward
             className={`text-2xl transition-all duration-500 ${
-              isOpenDetails ? "rotate-90" : "rotate-0"
+              isOpenSizes ? "rotate-90" : "rotate-0"
             }`}
           />
         </div>
-        {isOpenDetails && (
+        {isOpenSizes && (
           <div className="p-4 text-gray-700 ">
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro

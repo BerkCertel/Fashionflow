@@ -1,19 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { STATUS } from "../utils/status";
-import Data from "../data.json";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  products: Data,
-  productsStatus: STATUS.IDLE,
-  productDetail: null,
-  productDetailStatus: STATUS.IDLE,
+  products: [],
+  loading: false,
 };
+
+export const getProducts = createAsyncThunk("products", async () => {
+  const response = await fetch(`https://localhost:4000/products`);
+  return await response.json();
+});
 
 const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getProducts.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.products = [action.payload];
+    });
+  },
 });
 
-//! export const {} = categorySlice.actions;  sabit değişkenler üzerinde işlem yapmadıgımız için reducer kısmına birşey yazmadık extrareducer içinse direkt ulaşım saglayabılıyoruz
+// export const {} = productSlice.actions;
+
 export default productSlice.reducer;
