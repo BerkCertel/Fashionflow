@@ -10,13 +10,15 @@ const cloudinary = require(`cloudinary`).v2;
 
 dotenv.config();
 
+const app = express();
+
+app.use(cors());
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET,
 });
-
-const app = express();
 
 // express ?
 app.use(bodyParser.json({ limit: `30mb`, extended: true }));

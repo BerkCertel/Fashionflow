@@ -4,26 +4,39 @@ const bcrypt = require(`bcryptjs`);
 const jwt = require(`jsonwebtoken`);
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const Joi = require("joi");
 require("dotenv").config();
 
 // REGİSTER
 const register = async (req, res) => {
   try {
-    // Joi validation
-    const { error } = registerSchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: error.details[0].message });
-    }
-
     const { name, email, password } = req.body;
 
+    const isValidEmail = (email) => {
+      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      return emailRegex.test(email);
+    };
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({
+        message: `Please enter a valid email address`,
+      });
+    }
+
     const user = await User.findOne({ email });
+
     if (user) {
-      return res.status(409).json({ message: "This user already exists !!!" });
+      return res.status(409).json({
+        message: `This user already exists !!!`,
+      });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
+
+    if (passwordHash.length < 6) {
+      return res.status(500).json({
+        message: `Password cannot be less than 6 characters!!!`,
+      });
+    }
 
     const newUser = await User.create({
       name,
@@ -31,8 +44,8 @@ const register = async (req, res) => {
       password: passwordHash,
     });
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+    const token = await jwt.sign({ id: newUser._id }, `SECRETTOKEN`, {
+      expiresIn: `1h`,
     });
 
     const cookieOptions = {
@@ -40,7 +53,7 @@ const register = async (req, res) => {
       expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
     };
 
-    res.status(201).cookie("token", token, cookieOptions).json({
+    res.status(201).cookie(`token`, token, cookieOptions).json({
       newUser,
       token,
     });
@@ -54,26 +67,40 @@ const register = async (req, res) => {
 
 // LOGİN
 const login = async (req, res) => {
-  const { error } = loginSchema.validate(req.body);
+  await body(`email`)
+    .isEmail()
+    .withMessage(`Please enter a valid email address`)
+    .run(req);
+  await body(`password`)
+    .isLength({ min: 6 })
+    .withMessage(`Password cannot be less than 6 characters!!!.`)
+    .run(req);
 
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
 
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+
   if (!user) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({
+      message: `User not found`,
+    });
   }
 
   const comparePassword = await bcrypt.compare(password, user.password);
+
   if (!comparePassword) {
-    return res.status(401).json({ message: "Incorrect password entered." });
+    return res.status(401).json({
+      message: `Incorrect password entered.`,
+    });
   }
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+  const token = await jwt.sign({ id: user._id }, `SECRETTOKEN`, {
+    expiresIn: `1h`,
   });
 
   const cookieOptions = {
@@ -81,7 +108,7 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
   };
 
-  res.status(200).cookie("token", token, cookieOptions).json({
+  res.status(200).cookie(`token`, token, cookieOptions).json({
     user,
     token,
   });
@@ -101,11 +128,6 @@ const logout = async (req, res) => {
 
 //FORGOT PASSWORD
 const forgotPassword = async (req, res) => {
-  const { error } = forgotPasswordSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
-  }
-
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -201,27 +223,8 @@ const resetPassword = async (req, res) => {
 const userDetail = async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
-  if (!user) {
-    return status(404).json({ message: "User not found." });
-  }
-
   res.status(200).json({ user });
 };
-
-const registerSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
-});
-
-const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
-});
-
-const forgotPasswordSchema = Joi.object({
-  email: Joi.string().email().required(),
-});
 
 module.exports = {
   register,

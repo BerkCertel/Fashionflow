@@ -1,6 +1,9 @@
 import Carousel from "react-multi-carousel";
 import ProductsSliderItem from "./ProductsSliderItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProducts } from "../../../redux/productSlice";
+import Loading from "../../Loading/Loading";
 
 function ProductsSlider() {
   const responsive = {
@@ -22,35 +25,43 @@ function ProductsSlider() {
     },
   };
 
-  const productsData = useSelector((state) => state.products.products);
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   return (
-    <div
-      className="homepage-slider-div mt-10 border-b mb-10
-    "
-    >
-      <h3 className="text-center text-5xl font-thin mb-4  "> New Season</h3>
-      <hr />
-      <Carousel
-        responsive={responsive}
-        swipeable={false}
-        draggable={false}
-        showDots={false}
-        arrows={true}
-        ssr={true}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={500}
-        keyBoardControl={true}
-        customTransition="all .7s"
-        transitionDuration={1000}
-        containerClass="carousel-container    "
-        itemClass=" flex justify-center items-center p-10"
-      >
-        {productsData?.map((product) => {
-          return <ProductsSliderItem key={product.id} product={product} />;
-        })}
-      </Carousel>
+    <div className="homepage-slider-div mt-10 border-b mb-10">
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <h3 className="text-center text-5xl font-thin mb-4">New Season</h3>
+          <hr />
+          <Carousel
+            responsive={responsive}
+            swipeable={false}
+            draggable={false}
+            showDots={false}
+            arrows={true}
+            ssr={true}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={1000}
+            keyBoardControl={true}
+            customTransition="all .7s"
+            transitionDuration={1000}
+            containerClass="carousel-container"
+            itemClass="flex justify-center items-center p-10"
+          >
+            {products?.products?.map((product, i) => (
+              <ProductsSliderItem product={product} key={i} />
+            ))}
+          </Carousel>
+        </>
+      )}
     </div>
   );
 }

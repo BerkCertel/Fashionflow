@@ -1,23 +1,17 @@
 const Product = require(`../models/product.js`);
-const ProductFilter = require(`../utils/productFilter.js`);
+const ProductFilterUtil = require(`../utils/productFilter.js`);
 const Joi = require("joi");
 
 // All Products
 const allProducts = async (req, res) => {
   const resultsPerPage = 10;
 
-  const ProductFilter = new ProductFilter(Product.find(), req.query)
+  const productFilter = new ProductFilterUtil(Product.find(), req.query)
     .search()
     .filter()
     .pagination(resultsPerPage);
 
-  const products = await ProductFilter.query;
-
-  if (products.length > 0) {
-    res.status(404).json({
-      message: "There are no products available.",
-    });
-  }
+  const products = await productFilter.query;
 
   res.status(200).json({
     products,
@@ -28,15 +22,10 @@ const allProducts = async (req, res) => {
 const adminProducts = async (req, res, next) => {
   const products = await Product.find();
 
-  if (!req.user || req.user.role !== "admin") {
-    return res.status(403).json({ message: "Unauthorized access" });
-  }
-
   res.status(200).json({
     products,
   });
 };
-
 // Single Product
 const DetailProducts = async (req, res) => {
   const product = await Product.findById(req.params.id);
@@ -54,18 +43,7 @@ const DetailProducts = async (req, res) => {
 const createProduct = async (req, res) => {
   req.body.user = req.user.id;
 
-  if (!req.user || req.user.role !== "admin") {
-    return res.status(403).json({ message: "Unauthorized access" });
-  }
-
   const product = await Product.create(req.body);
-
-  const { error } = productSchema.validate(req.body);
-  if (error) {
-    return res
-      .status(400)
-      .json({ message: "Invalid product data", details: error.details });
-  }
 
   res.status(201).json({
     product,

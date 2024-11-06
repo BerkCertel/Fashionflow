@@ -6,12 +6,16 @@ import { Link } from "react-router-dom";
 import { HiArrowSmDown } from "react-icons/hi";
 import PropTypes from "prop-types";
 
-function ProductsSliderItem({ product }) {
+function ProductCartItem({ product }) {
   const [isHovered, setIsHovered] = useState(false);
+
+  ProductCartItem.propTypes = {
+    product: PropTypes.object.isRequired,
+  };
 
   return (
     <div
-      className=" flex justify-center items-center flex-col cursor-pointer shadow rounded border hover:shadow-2xl transition duration-500"
+      className=" flex justify-center items-center flex-col cursor-pointer shadow rounded border hover:shadow-2xl transition duration-500 "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -57,7 +61,7 @@ function ProductsSliderItem({ product }) {
       <h2 className="font-thin mt-2">{product.name}</h2>
       <hr className="w-3/4" />
       <p className="font-semibold flex gap-1 pb-3 mt-2">
-        {product.price.current}$
+        {product.price.current} $
         <span className="text-xs font-normal text-red-600  line-through">
           {product.price.discount}$
         </span>
@@ -66,8 +70,4 @@ function ProductsSliderItem({ product }) {
   );
 }
 
-ProductsSliderItem.propTypes = {
-  product: PropTypes.object.isRequired,
-};
-
-export default ProductsSliderItem;
+export default ProductCartItem;
