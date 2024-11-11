@@ -14,7 +14,7 @@ function ProductCart() {
   }, [dispatch]);
 
   return (
-    <main className="product-cart-main-div container mx-auto border p-5 rounded-lg ">
+    <main className="product-cart-main-div container mx-auto border p-5 rounded-lg">
       <div className="text-5xl text-center mb-3">All Product</div>
       <hr className=" mb-5" />
       {loading ? (

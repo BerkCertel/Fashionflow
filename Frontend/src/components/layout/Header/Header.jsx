@@ -33,9 +33,9 @@ function Header({ setIsSearchShow }) {
         </span>
       </h1>
 
-      <nav className="  bg-orange-500   ">
+      <nav className=" bg-orange-500 ">
         <div className="  flex justify-around min-h-16 w-full container mx-auto">
-          <div className=" flex justify-center items-center text-4xl font-medium">
+          <div className=" flex justify-center items-center text-4xl font-serif">
             <Link to={"/"}>FASHIONFLOW</Link>
           </div>
 

@@ -7,7 +7,7 @@ function Favorites() {
     <section className=" container mx-auto w-full h-full  p-10 ">
       <div className="flex justify-center items-center flex-col space-y-6">
         <div className="w-full flex justify-center items-center flex-col">
-          <h2 className=" text-6xl">Your Cart</h2>
+          <h2 className=" text-6xl">Your Favorites</h2>
           <hr className="w-full mt-3" />
         </div>
 

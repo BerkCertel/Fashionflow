@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiArrowSmDown } from "react-icons/hi";
 import PropTypes from "prop-types";
 
@@ -13,9 +13,11 @@ function ProductCartItem({ product }) {
     product: PropTypes.object.isRequired,
   };
 
+  const navigate = useNavigate();
+
   return (
     <div
-      className=" flex justify-center items-center flex-col cursor-pointer shadow rounded border hover:shadow-2xl transition duration-500 "
+      className=" flex justify-center items-center flex-col shadow rounded border hover:shadow-2xl transition duration-500 "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -25,22 +27,37 @@ function ProductCartItem({ product }) {
             isHovered ? "visible" : "invisible"
           }`}
         >
-          <button className="text-white bg-black p-1 rounded hover:opacity-65 ">
-            <IoCart className="text-sm" />
-          </button>
-          <button className="text-white bg-black p-1 rounded  hover:opacity-65">
-            <FaHeart className="text-sm" />
-          </button>
           <Link
-            to="/productdetails/:id"
+            to={`/favorites`}
+            className="text-white bg-black p-1 rounded hover:opacity-65 "
+          >
+            <IoCart className="text-sm" />
+          </Link>
+
+          <Link
+            to={`/cart`}
             className="text-white bg-black p-1 rounded  hover:opacity-65"
           >
-            <IoMdEye className="text-sm" />
+            <FaHeart className="text-sm" />
           </Link>
+
+          <button
+            className="text-white bg-black p-1 rounded  hover:opacity-65"
+            onClick={() => navigate(`/product/${product?._id}`)}
+          >
+            <IoMdEye className="text-sm" />
+          </button>
         </div>
-        <small className="absolute z-30 top-4 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-red-600">
-          <HiArrowSmDown className="text-sm" />%{product.price.discount}
+
+        <small className="absolute z-30 top-12 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-yellow-600 ">
+          <FaStar className="size-3 mr-1" />
+          {product.rating}
         </small>
+
+        <small className="absolute z-30 top-4 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-red-600">
+          <HiArrowSmDown className="size-4" />%{product.price.discount}
+        </small>
+
         <img
           className={`absolute object-cover max-w-[250px] max-h-[270px]  rounded transition-opacity duration-700  ${
             isHovered ? "opacity-0" : "opacity-100 z-20"

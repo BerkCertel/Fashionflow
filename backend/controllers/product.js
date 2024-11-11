@@ -26,6 +26,7 @@ const adminProducts = async (req, res, next) => {
     products,
   });
 };
+
 // Single Product
 const DetailProducts = async (req, res) => {
   const product = await Product.findById(req.params.id);
@@ -91,7 +92,7 @@ const createReview = async (req, res, next) => {
 
   const review = {
     user: req.user._id,
-    user: req.user.name,
+    userName: req.user.name,
     comment,
     rating: Number(rating),
   };

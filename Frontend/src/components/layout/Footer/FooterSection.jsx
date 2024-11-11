@@ -73,12 +73,12 @@ function FooterSection() {
       <ul className="flex items-center justify-center w-2/12 h-full space-x-4 flex-1">
         <img
           className="h-[36px] w-auto cursor-pointer"
-          src="images/footer/ios.png"
+          src="/images/footer/ios.png"
           alt="Download on iOS"
         />
         <img
           className="h-[36px] w-auto cursor-pointer"
-          src="images/footer/google-play.png"
+          src="/images/footer/google-play.png"
           alt="Get it on Google Play"
         />
       </ul>

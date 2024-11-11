@@ -7,6 +7,7 @@ import BlogDetailPage from "./pages/users/BlogDetailPage";
 import ProductDetailsPage from "./pages/users/ProductDetailsPage";
 import CartPage from "./pages/users/CartPage";
 import FavoritesPage from "./pages/users/FavoritesPage";
+import AllProductPage from "./pages/users/AllProductPage";
 import "react-multi-carousel/lib/styles.css";
 import "animate.css";
 import "./App.css";
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/products" element={<AllProductPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/favorites" element={<FavoritesPage />} />
       <Route path="/blogs" element={<AllBlogsPage />} />

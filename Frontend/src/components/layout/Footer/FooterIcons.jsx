@@ -5,7 +5,7 @@ import { FaRegCreditCard } from "react-icons/fa";
 
 function FooterIcons() {
   return (
-    <div className="footer-icons-main-div w-full h-full bg-orange-500   p-3">
+    <div className="footer-icons-main-div w-full  bg-orange-500   p-3">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex space-x-2">
           <CiDeliveryTruck className="footer-icon" />

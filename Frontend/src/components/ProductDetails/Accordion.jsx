@@ -1,10 +1,15 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { IoIosArrowForward } from "react-icons/io";
 
-function Accordion() {
+function Accordion({ product }) {
   const [isOpenDetails, setIsOpenDetails] = useState(true);
-  const [isOpenSizes, setIsOpenSizes] = useState(true);
+  const [isOpenSizes, setIsOpenSizes] = useState(false);
   const [isOpenFeature, setIsOpenFeature] = useState(false);
+
+  Accordion.propTypes = {
+    product: PropTypes.object.isRequired,
+  };
 
   return (
     <div>
@@ -22,15 +27,7 @@ function Accordion() {
         </div>
         {isOpenDetails && (
           <div className="p-4 text-gray-700 animate__animated animate__fadeIn ">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro
-              voluptatem aliquam quibusdam temporibus ipsam commodi perspiciatis
-              reiciendis odit doloremque repudiandae incidunt corporis quia
-              assumenda non earum magni culpa doloribus, ipsa, exercitationem
-              suscipit? Qui, itaque saepe perspiciatis amet maxime ducimus
-              voluptatem fugit, sequi similique nemo veniam accusamus labore
-              repudiandae tempora ipsam?
-            </p>
+            <p>{product?.product?.description}</p>
           </div>
         )}
       </div>
