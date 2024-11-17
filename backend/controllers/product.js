@@ -1,15 +1,15 @@
 const Product = require(`../models/product.js`);
-const ProductFilterUtil = require(`../utils/productFilter.js`);
+const ProductFilter = require(`../utils/productFilter.js`);
 const Joi = require("joi");
 
 // All Products
 const allProducts = async (req, res) => {
-  const resultsPerPage = 10;
+  const resultPerPage = 10;
 
-  const productFilter = new ProductFilterUtil(Product.find(), req.query)
+  const productFilter = new ProductFilter(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resultsPerPage);
+    .pagination(resultPerPage);
 
   const products = await productFilter.query;
 

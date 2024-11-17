@@ -42,8 +42,8 @@ function ProductsSlider() {
           <hr />
           <Carousel
             responsive={responsive}
-            swipeable={false}
-            draggable={false}
+            swipeable={true}
+            draggable={true}
             showDots={false}
             arrows={true}
             ssr={true}

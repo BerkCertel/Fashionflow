@@ -9,16 +9,19 @@ function AllProductPage() {
   const dispatch = useDispatch();
 
   const { products, loading } = useSelector((state) => state.products);
+  const { keyword } = useSelector((state) => state.general);
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getProducts(keyword));
+  }, [dispatch, keyword]);
+
+  console.log(products);
 
   return (
-    <main>
-      <div className="container mx-auto flex gap-3">
+    <main className="container mx-auto">
+      <div className=" flex gap-4 p-5">
         <Filter />
-        <div className="w-4/6">
+        <div className="w-5/6">
           {loading ? (
             <Loading />
           ) : (
@@ -32,6 +35,7 @@ function AllProductPage() {
           )}
         </div>
       </div>
+
       <div>pagination</div>
     </main>
   );

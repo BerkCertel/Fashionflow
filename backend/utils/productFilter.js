@@ -5,23 +5,23 @@ class ProductFilter {
   }
 
   search() {
-    const keyword = this.queryStr.keyword
+    const keyword = this.queryStr?.keyword
       ? {
           name: {
-            $regex: this.queryStr.keyword,
-            $options: `i`,
+            $regex: this.queryStr?.keyword,
+            $options: "i",
           },
         }
       : {};
 
-    this.query = this.query.find({ ...keyword });
+    this.query = this.query?.find({ ...keyword });
     return this;
   }
 
   filter() {
     const queryCopy = { ...this.queryStr };
 
-    const deleteArea = [`keyword`, `page`, `limit`];
+    const deleteArea = ["keyword", "page", "limit"];
     deleteArea.forEach((item) => delete queryCopy[item]);
 
     let queryStr = JSON.stringify(queryCopy);
@@ -31,11 +31,11 @@ class ProductFilter {
     return this;
   }
 
-  pagination(resultsPerPage) {
-    const activePage = this.queryStr.page || 1;
-    const skip = resultsPerPage * (activePage - 1);
+  pagination(resultPerPage) {
+    const activePage = this.queryStr?.page || 1;
+    const skip = resultPerPage * (activePage - 1);
 
-    this.query = this.query.limit(resultsPerPage).skip(skip);
+    this.query = this.query.limit(resultPerPage).skip(skip);
     return this;
   }
 }

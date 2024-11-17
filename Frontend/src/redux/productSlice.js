@@ -6,8 +6,10 @@ const initialState = {
   loading: false,
 };
 
-export const getProducts = createAsyncThunk("products", async () => {
-  const response = await fetch(`http://localhost:4000/products`);
+export const getProducts = createAsyncThunk("products", async (params) => {
+  const response = await fetch(
+    `http://localhost:4000/products?keyword=${params.keyword}`
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

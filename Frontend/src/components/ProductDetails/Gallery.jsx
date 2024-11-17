@@ -25,7 +25,7 @@ function Gallery({ product }) {
   };
 
   return (
-    <div className="product-img-div flex  flex-col w-2/6 space-y-3 top-1 ">
+    <div className="product-img-div flex  flex-col w-2/6 space-y-3 top-1  ">
       <div className="w-full h-full relative">
         <small className="absolute z-30 top-12 right-3 flex justify-center items-center text-white rounded-lg p-1 bg-yellow-600 ">
           <FaStar className="size-3 mr-1" />

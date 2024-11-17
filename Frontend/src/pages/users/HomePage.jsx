@@ -10,9 +10,9 @@ function HomePage() {
     <main className="home-page-main-div">
       <HomeBigSlider />
       <Categories />
-      <ProductCart />
       <ProductsSlider />
       <SingleCampaign />
+      <ProductCart />
       <ProductsSlider />
       <Blogs />
     </main>

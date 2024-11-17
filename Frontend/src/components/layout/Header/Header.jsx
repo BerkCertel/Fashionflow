@@ -46,6 +46,11 @@ function Header({ setIsSearchShow }) {
             </li>
 
             <li className="relative group text-white hover:text-black transition-all duration-500 ">
+              <Link to="/products">Products</Link>
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
+            </li>
+
+            <li className="relative group text-white hover:text-black transition-all duration-500 ">
               <Link to="/blogs">Blogs</Link>
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black transition-all duration-500 group-hover:w-full"></span>
             </li>
