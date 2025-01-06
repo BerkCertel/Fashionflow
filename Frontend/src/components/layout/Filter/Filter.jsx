@@ -1,5 +1,7 @@
-function Filter() {
-  const categoryList = ["Outerwear", "Skirt", "Pants", "T-Shirt", "Dress"];
+import PropTypes from "prop-types";
+
+function Filter({ setPrice, setRating, setCategory }) {
+  const categoryList = ["Giyim", "Bilgisayar", "Çanta"];
   const ratingList = [1, 2, 3, 4, 5];
 
   return (
@@ -9,13 +11,19 @@ function Filter() {
       </div>
       <div className="flex items-center gap-2 w-full">
         <input
-          className="border outline-none px-1 w-24 rounded"
+          onChange={(e) =>
+            setPrice((prev) => ({ ...prev, min: e.target.value }))
+          }
+          className="border outline-orange-500 p-1 w-1/2 rounded"
           type="number"
           placeholder="Min"
           min={0}
         />
         <input
-          className="border rounded  outline-none px-1 w-24"
+          onChange={(e) =>
+            setPrice((prev) => ({ ...prev, max: e.target.value }))
+          }
+          className="border rounded  outline-orange-500 p-1 w-1/2"
           type="number"
           placeholder="Max"
           min={1}
@@ -29,6 +37,7 @@ function Filter() {
         {categoryList.map((category, i) => {
           return (
             <div
+              onClick={() => setCategory(category)}
               className="text-white bg-orange-500 rounded px-2 py-1 cursor-pointer hover:opacity-70"
               key={i}
             >
@@ -46,6 +55,7 @@ function Filter() {
           {ratingList.map((rating, i) => {
             return (
               <div
+                onClick={() => setRating(rating)}
                 className="text-white bg-orange-500 rounded-full px-2 cursor-pointer hover:opacity-70"
                 key={i}
               >
@@ -58,5 +68,11 @@ function Filter() {
     </div>
   );
 }
+
+Filter.propTypes = {
+  setRating: PropTypes.func,
+  setPrice: PropTypes.func,
+  setCategory: PropTypes.func,
+};
 
 export default Filter;

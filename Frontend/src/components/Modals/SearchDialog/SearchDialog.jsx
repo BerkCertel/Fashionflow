@@ -14,8 +14,9 @@ function SearchDialog({ isSearchShow, setIsSearchShow }) {
 
   const keywordFunc = () => {
     dispatch(getKeyword(keyword));
-    navigate(`/products`);
     setKeyword("");
+    navigate(`/products`);
+    setIsSearchShow(false);
   };
 
   return (
@@ -29,7 +30,6 @@ function SearchDialog({ isSearchShow, setIsSearchShow }) {
         className="flex justify-start flex-col items-center w-2/3 h-2/3 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 p-6 rounded-xl shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button className="w-full flex justify-end">
           <IoIosCloseCircleOutline
             className="text-4xl cursor-pointer hover:text-white transition duration-300"
@@ -37,10 +37,8 @@ function SearchDialog({ isSearchShow, setIsSearchShow }) {
           />
         </button>
 
-        {/* Search Input and Button */}
         <div className="w-full h-full flex flex-col items-center ">
           <div className="w-3/4 flex space-x-3">
-            {/* Input Field */}
             <input
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
@@ -50,7 +48,6 @@ function SearchDialog({ isSearchShow, setIsSearchShow }) {
                          text-gray-800 focus:outline-none focus:ring-2 focus:ring-white transition duration-300 bg-white shadow-lg"
             />
 
-            {/* Search Button */}
             <div
               onClick={keywordFunc}
               className="w-1/6 flex justify-center items-center cursor-pointer text-3xl bg-white p-3 rounded-full

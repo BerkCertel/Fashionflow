@@ -9,11 +9,9 @@ import PropTypes from "prop-types";
 function ProductCartItem({ product }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  ProductCartItem.propTypes = {
-    product: PropTypes.object.isRequired,
-  };
-
   const navigate = useNavigate();
+
+  console.log(product);
 
   return (
     <div
@@ -51,18 +49,18 @@ function ProductCartItem({ product }) {
 
         <small className="absolute z-30 top-12 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-yellow-600 ">
           <FaStar className="size-3 mr-1" />
-          {product.rating}
+          {product?.rating}
         </small>
 
         <small className="absolute z-30 top-4 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-red-600">
-          <HiArrowSmDown className="size-4" />%{product.price.discount}
+          <HiArrowSmDown className="size-4" />%{product?.discount}
         </small>
 
         <img
           className={`absolute object-cover max-w-[250px] max-h-[270px]  rounded transition-opacity duration-700  ${
             isHovered ? "opacity-0" : "opacity-100 z-20"
           }`}
-          src={product.images[0]}
+          src={product?.images[0]}
           alt="Product Image 1"
         />
 
@@ -70,21 +68,25 @@ function ProductCartItem({ product }) {
           className={`max-w-[250px] max-h-[270px]  rounded transition-opacity duration-700  ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
-          src={product.images[1]}
+          src={product?.images[1]}
           alt="Product Image 2"
         />
       </div>
 
-      <h2 className="font-thin mt-2">{product.name}</h2>
+      <h2 className="font-thin mt-2">{product?.name}</h2>
       <hr className="w-3/4" />
       <p className="font-semibold flex gap-1 pb-3 mt-2">
-        {product.price.current} $
+        {product?.price.discounted}
         <span className="text-xs font-normal text-red-600  line-through">
-          {product.price.discount}$
+          {product?.price.current}
         </span>
       </p>
     </div>
   );
 }
+
+ProductCartItem.propTypes = {
+  product: PropTypes.object.isRequired,
+};
 
 export default ProductCartItem;

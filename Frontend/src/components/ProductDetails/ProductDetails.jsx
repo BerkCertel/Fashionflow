@@ -23,7 +23,6 @@ function ProductDetails() {
   }, [dispatch, id]);
 
   // Quantity
-
   const [quantity, setQuantity] = useState(1);
 
   const increment = () => {

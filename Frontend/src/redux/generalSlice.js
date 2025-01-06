@@ -4,7 +4,7 @@ const initialState = {
   keyword: "",
 };
 
-const generalSlice = createSlice({
+export const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {

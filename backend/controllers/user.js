@@ -1,106 +1,34 @@
-const User = require(`../models/user`);
-const { body, validationResult } = require(`express-validator`);
-const bcrypt = require(`bcryptjs`);
-const jwt = require(`jsonwebtoken`);
+const User = require("../models/user.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-// REGİSTER
+// register
 const register = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    const isValidEmail = (email) => {
-      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-      return emailRegex.test(email);
-    };
-
-    if (!isValidEmail(email)) {
-      return res.status(400).json({
-        message: `Please enter a valid email address`,
-      });
-    }
-
-    const user = await User.findOne({ email });
-
-    if (user) {
-      return res.status(409).json({
-        message: `This user already exists !!!`,
-      });
-    }
-
-    const passwordHash = await bcrypt.hash(password, 10);
-
-    if (passwordHash.length < 6) {
-      return res.status(500).json({
-        message: `Password cannot be less than 6 characters!!!`,
-      });
-    }
-
-    const newUser = await User.create({
-      name,
-      email,
-      password: passwordHash,
-    });
-
-    const token = await jwt.sign({ id: newUser._id }, `SECRETTOKEN`, {
-      expiresIn: `1h`,
-    });
-
-    const cookieOptions = {
-      httpOnly: true,
-      expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    };
-
-    res.status(201).cookie(`token`, token, cookieOptions).json({
-      newUser,
-      token,
-    });
-  } catch (error) {
-    console.error("Kayıt hatası:", error);
-    return res
-      .status(500)
-      .json({ message: "Kayıt sırasında bir hata oluştu." });
-  }
-};
-
-// LOGİN
-const login = async (req, res) => {
-  await body(`email`)
-    .isEmail()
-    .withMessage(`Please enter a valid email address`)
-    .run(req);
-  await body(`password`)
-    .isLength({ min: 6 })
-    .withMessage(`Password cannot be less than 6 characters!!!.`)
-    .run(req);
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   const user = await User.findOne({ email });
 
-  if (!user) {
-    return res.status(404).json({
-      message: `User not found`,
-    });
+  if (user) {
+    return res
+      .status(400)
+      .json({ message: `This e-mail (${email}) address is used...` });
   }
 
-  const comparePassword = await bcrypt.compare(password, user.password);
-
-  if (!comparePassword) {
-    return res.status(401).json({
-      message: `Incorrect password entered.`,
-    });
+  if (password.length < 6) {
+    return res
+      .status(400)
+      .json({ message: "Password must be at least 6 characters long." });
   }
 
-  const token = await jwt.sign({ id: user._id }, `SECRETTOKEN`, {
-    expiresIn: `1h`,
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = await User.create({ name, email, password: hashedPassword });
+
+  const token = await jwt.sign({ id: newUser._id }, "SECRETTOKEN", {
+    expiresIn: "1h",
   });
 
   const cookieOptions = {
@@ -108,33 +36,62 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
   };
 
-  res.status(200).cookie(`token`, token, cookieOptions).json({
-    user,
-    token,
-  });
+  res
+    .status(201)
+    .cookie("token", token, cookieOptions)
+    .json({ newUser, token });
 };
 
-// LOGOUT
+// login
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found." });
+  }
+
+  const comparePassword = await bcrypt.compare(password, user.password);
+
+  if (!comparePassword) {
+    return res.status(401).json({ message: "Invalid password." });
+  }
+
+  const token = await jwt.sign({ id: user._id }, "SECRETTOKEN", {
+    expiresIn: "1h",
+  });
+
+  const cookieOptions = {
+    httpOnly: true,
+    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+  };
+
+  res.status(200).cookie("token", token, cookieOptions).json({ user, token });
+};
+
+// logout
 const logout = async (req, res) => {
   const cookieOptions = {
     httpOnly: true,
     expires: new Date(Date.now()),
   };
 
-  res.status(200).cookie(`token`, null, cookieOptions).json({
-    message: `Logout successful`,
-  });
+  res
+    .status(200)
+    .cookie("token", null, cookieOptions)
+    .json({ message: "Logout is succesfully" });
 };
 
-//FORGOT PASSWORD
+// forgot
 const forgotPassword = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return res.status(404).json({ message: "No such user was found." });
+    return res.status(404).json({ message: "User not found." });
   }
 
-  const resetToken = crypto.randomBytes(20).toString("hex");
+  const resetToken = crypto.randomBytes(20).toString(`hex`);
 
   user.resetPasswordToken = crypto
     .createHash("sha256")
@@ -145,22 +102,25 @@ const forgotPassword = async (req, res) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const passwordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/reset/${resetToken}`;
+  const passwordUrl = `${process.env.MAIN_HOST}/reset/${resetToken}`;
 
-  const message = `The password reset link has been sent via email. : ${resetToken}`;
+  const message = `The token you will use to change your password: ${passwordUrl}`;
 
   try {
-    const transport = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
-      service: process.env.EMAIL_SERVICE,
+      service: `${process.env.EMAIL_SERVICE}`,
+      debug: true,
+      logger: true,
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        pass: `${process.env.EMAIL_PASS}`,
       },
       secure: true,
+      tls: {
+        rejectUnauthorized: true,
+      },
     });
 
     const mailData = {
@@ -170,20 +130,28 @@ const forgotPassword = async (req, res) => {
       text: message,
     };
 
-    await transport.sendMail(mailData);
-
-    res.status(200).json({ message: "Please check your email." });
+    try {
+      await transporter.sendMail(mailData);
+      return res.status(200).json({ message: "Please check your email." });
+    } catch (error) {
+      console.error("Mail Gönderme Hatası:", error);
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+      await user.save({ validateBeforeSave: false });
+      res.status(400).json({ message: error.message });
+    }
   } catch (error) {
-    user.resetPasswordExpire = undefined;
+    console.log(error);
     user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
 
     await user.save({ validateBeforeSave: false });
 
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
-//RESET PASSWORD
+// Reset
 const resetPassword = async (req, res) => {
   const resetPasswordToken = crypto
     .createHash("sha256")
@@ -196,33 +164,35 @@ const resetPassword = async (req, res) => {
   });
 
   if (!user) {
-    return res.status(400).json({ message: "Invalid or expired token." });
+    return res.status(401).json({ message: "Invalid token" });
   }
 
-  user.password = req.body.password;
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  user.password = hashedPassword;
 
   user.resetPasswordExpire = undefined;
-
   user.resetPasswordToken = undefined;
 
   await user.save();
 
-  const token = jwt.sign({ id: user._id }, "SECRETTOKEN", { expiresIn: "1h" });
+  const token = jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, {
+    expiresIn: "1h",
+  });
 
   const cookieOptions = {
     httpOnly: true,
     expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
   };
-
-  res.status(200).cookie(`token`, token, cookieOptions).json({
-    user,
-    token,
-  });
+  res.status(200).cookie("token", token, cookieOptions).json({ user, token });
 };
 
+//User Detail
 const userDetail = async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.user.id);
 
+  if (!user) {
+    return res.status(404).json({ message: "User Not Found." });
+  }
   res.status(200).json({ user });
 };
 

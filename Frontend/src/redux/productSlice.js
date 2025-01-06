@@ -5,17 +5,36 @@ const initialState = {
   product: {},
   loading: false,
 };
-
 export const getProducts = createAsyncThunk("products", async (params) => {
-  const response = await fetch(
-    `http://localhost:4000/products?keyword=${params.keyword}`
-  );
+  let link;
+
+  if (params) {
+    link = `http://localhost:4000/products?keyword=${params?.keyword || ""}
+    &rating[gte]=${params?.rating || 0}
+    &price[gte]=${params?.price?.current?.min || 0}
+    &price[lte]=${params?.price?.current?.max || 30000}`;
+
+    if (params?.category) {
+      link = `http://localhost:4000/products?keyword=${
+        params?.keyword || ""
+      }&rating[gte]=${params?.rating || 0}&price[gte]=${
+        params?.price?.current?.min || 0
+      }&price[lte]=${params?.price?.current?.max || 30000}&category=${
+        params?.category || ""
+      }`;
+    }
+  } else {
+    // params yoksa tüm ürünler için varsayılan URL
+    link = `http://localhost:4000/products?keyword=&rating[gte]=0&price[gte]=0&price[lte]=30000`;
+  }
+
+  const response = await fetch(link);
+
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
   return await response.json();
 });
-
 export const getProductDetail = createAsyncThunk("product", async (id) => {
   const response = await fetch(`http://localhost:4000/products/${id}`);
   if (!response.ok) {

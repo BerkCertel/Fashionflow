@@ -1,69 +1,104 @@
 const Product = require(`../models/product.js`);
 const ProductFilter = require(`../utils/productFilter.js`);
 const Joi = require("joi");
+const cloudinary = require("cloudinary").v2;
 
 // All Products
 const allProducts = async (req, res) => {
-  const resultPerPage = 10;
+  // const resultPerPage = 10;
 
-  const productFilter = new ProductFilter(Product.find(), req.query)
-    .search()
-    .filter()
-    .pagination(resultPerPage);
+  // const productFilter = new ProductFilter(Product.find(), req.query)
+  //   .search()
+  //   .filter()
+  //   .pagination(resultPerPage);
 
-  const products = await productFilter.query;
+  // const products = await productFilter.query;
 
-  res.status(200).json({
-    products,
-  });
+  try {
+    const products = await Product.find({});
+    res.status(200).json({ products });
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
 };
 
 // Admin All Product
 const adminProducts = async (req, res, next) => {
-  const products = await Product.find();
-
-  res.status(200).json({
-    products,
-  });
+  try {
+    const products = await Product.find({});
+    res.status(200).json({ products });
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
 };
 
 // Single Product
 const DetailProducts = async (req, res) => {
-  const product = await Product.findById(req.params.id);
-
-  if (!product) {
-    return res.status(404).json({ message: "product not found" });
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json({ product });
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).json({ message: "Server Error" });
   }
-
-  res.status(200).json({
-    product,
-  });
 };
 
 // ADMİN && Create Product
-const createProduct = async (req, res) => {
-  req.body.user = req.user.id;
+const createProduct = async (req, res, next) => {
+  // let images = [];
 
-  const product = await Product.create(req.body);
+  // if (typeof req.body.images === "string") {
+  //   images.push(req.body.images);
+  // } else {
+  //   images = req.body.images;
+  // }
 
-  res.status(201).json({
-    product,
-  });
+  // let allImage = [];
+
+  // for (let i = 0; i < images.length; i++) {
+  //   const result = await cloudinary.uploader.upload(images[i], {
+  //     folder: "products",
+  //   });
+
+  //   allImage.push({ public_id: result.public_id, url: result.secure_url });
+  // }
+
+  // req.body.images = allImage;
+  // req.body.user = req.user.id;
+
+  try {
+    const productData = req.body;
+
+    const product = await Product.create(productData);
+    res.status(201).json({ product });
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
 };
 
 // ADMİN && Delete Product
-const deleteProduct = async (req, res) => {
-  const product = await Product.findById(req.params.id);
+const deleteProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
 
-  if (!product) {
-    return res.status(404).json({ message: "product not deleted." });
+    if (!product) {
+      return res.status(404).json({ message: "product not found." });
+    }
+
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.uploader.destroy(product.images[i].public_id);
+    }
+
+    await Book.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({ message: "The book has been deleted successfully" });
+  } catch (error) {
+    console.error("Error fetching books:", error);
+    res.status(500).json({ message: "Server Error" });
   }
-
-  await product.remove();
-
-  res.status(200).json({
-    message: `Product deleted successfully!`,
-  });
 };
 
 // ADMİN && Update Product
@@ -75,6 +110,32 @@ const updateProduct = async (req, res, next) => {
       .status(500)
       .json({ message: "product not updated. Product not found." });
   }
+
+  let images = [];
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  if (images !== undefined) {
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.uploader.destroy(product.images[i].public_id);
+    }
+  }
+
+  let allImage = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.uploader.upload(images[i], {
+      folder: "products",
+    });
+
+    allImage.push({ public_id: result.public_id, url: result.secure_url });
+  }
+
+  req.body.images = allImage;
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -88,31 +149,36 @@ const updateProduct = async (req, res, next) => {
 
 // CREATE REWİEW
 const createReview = async (req, res, next) => {
-  const { productId, comment, rating } = req.body;
+  try {
+    const { productId, comment, rating } = req.body;
 
-  const review = {
-    user: req.user._id,
-    userName: req.user.name,
-    comment,
-    rating: Number(rating),
-  };
-  const product = await Product.findByIdAndUpdate(productId);
+    const review = {
+      user: req.user._id,
+      userName: req.user.name,
+      comment,
+      rating: Number(rating),
+    };
+    const product = await Product.findById(productId);
 
-  product.reviews.push(review);
+    product.reviews.push(review);
 
-  let avg = 0;
+    let avg = 0;
 
-  product.reviews.forEach((rev) => {
-    avg += rev.rating;
-  });
+    product.reviews.forEach((rev) => {
+      avg += rev.rating;
+    });
 
-  product.rating = avg / product.reviews.length;
+    product.rating = avg / product.reviews.length;
 
-  await product.save({ validateBeforeSave: false });
+    await product.save({ validateBeforeSave: false });
 
-  res.status(200).json({
-    message: `Your comment has been added successfully`,
-  });
+    res.status(200).json({
+      message: `Your comment has been added successfully`,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Bir hata oluştu." });
+  }
 };
 
 const productSchema = Joi.object({

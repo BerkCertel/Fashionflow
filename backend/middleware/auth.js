@@ -2,23 +2,39 @@ const User = require("../models/user.js");
 const jwt = require("jsonwebtoken");
 
 const authenticationMid = async (req, res, next) => {
-  const { token } = req.cookies;
+  try {
+    if (!req.headers.authorization) {
+      return res
+        .status(401)
+        .json({ message: "Authorization header is missing." });
+    }
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Authorization failed. Token not found." });
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Token is missing. Please log in first." });
+    }
+
+    const decodedData = jwt.verify(token, "SECRETTOKEN");
+    if (!decodedData) {
+      return res
+        .status(401)
+        .json({ message: "Invalid token. Please log in again." });
+    }
+
+    req.user = await User.findById(decodedData.id);
+    if (!req.user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    next();
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Something went wrong.", error: error.message });
   }
-
-  const decodedData = jwt.verify(token, "SECRETTOKEN");
-
-  if (!decodedData) {
-    return res.status(401).json({ message: "Your access token is invalid." });
-  }
-
-  req.user = await User.findById(decodedData.id);
-
-  next();
 };
 
 const roleChecked = (...roles) => {

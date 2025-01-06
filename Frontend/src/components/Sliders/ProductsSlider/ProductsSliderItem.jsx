@@ -15,6 +15,11 @@ function ProductsSliderItem({ product }) {
     product: PropTypes.object.isRequired,
   };
 
+  const handleClikc = () => {
+    navigate(`/product/${product?._id}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div
       className=" flex justify-center items-center flex-col  shadow rounded border hover:shadow-2xl transition duration-500"
@@ -34,7 +39,7 @@ function ProductsSliderItem({ product }) {
             <FaHeart className="text-sm" />
           </button>
           <button
-            onClick={() => navigate(`/product/${product?._id}`)}
+            onClick={handleClikc}
             className="text-white bg-black p-1 rounded  hover:opacity-65"
           >
             <IoMdEye className="text-sm" />
@@ -43,18 +48,18 @@ function ProductsSliderItem({ product }) {
 
         <small className="absolute z-30 top-12 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-yellow-600 ">
           <FaStar className="size-3 mr-1" />
-          {product.rating}
+          {product?.rating}
         </small>
 
         <small className="absolute z-30 top-4 right-5 flex justify-center items-center text-white rounded-lg p-1 bg-red-600">
-          <HiArrowSmDown className="size-4" />%{product.price.discount}
+          <HiArrowSmDown className="size-4" />%{product?.price?.discount}
         </small>
 
         <img
           className={`absolute object-cover max-w-[250px] max-h-[270px]  rounded transition-opacity duration-700  ${
             isHovered ? "opacity-0" : "opacity-100 z-20"
           }`}
-          src={product.images[0]}
+          src={product?.images[0]}
           alt="Product Image 1"
         />
 
@@ -62,17 +67,17 @@ function ProductsSliderItem({ product }) {
           className={`max-w-[250px] max-h-[270px]  rounded transition-opacity duration-700  ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
-          src={product.images[1]}
+          src={product?.images[1]}
           alt="Product Image 2"
         />
       </div>
 
-      <h2 className="font-thin mt-2">{product.name}</h2>
+      <h2 className="font-thin mt-2">{product?.name}</h2>
       <hr className="w-3/4" />
       <p className="font-semibold flex gap-1 pb-3 mt-2">
-        {product.price.current}$
+        {product?.price?.current}$
         <span className="text-xs font-normal text-red-600  line-through">
-          {product.price.discount}$
+          {product?.price?.discount}$
         </span>
       </p>
     </div>

@@ -5,16 +5,16 @@ class ProductFilter {
   }
 
   search() {
-    const keyword = this.queryStr?.keyword
+    const keyword = this.queryStr.keyword
       ? {
           name: {
-            $regex: this.queryStr?.keyword,
+            $regex: this.queryStr.keyword,
             $options: "i",
           },
         }
       : {};
 
-    this.query = this.query?.find({ ...keyword });
+    this.query = this.query.find({ ...keyword });
     return this;
   }
 
@@ -32,7 +32,7 @@ class ProductFilter {
   }
 
   pagination(resultPerPage) {
-    const activePage = this.queryStr?.page || 1;
+    const activePage = this.queryStr.page || 1;
     const skip = resultPerPage * (activePage - 1);
 
     this.query = this.query.limit(resultPerPage).skip(skip);
